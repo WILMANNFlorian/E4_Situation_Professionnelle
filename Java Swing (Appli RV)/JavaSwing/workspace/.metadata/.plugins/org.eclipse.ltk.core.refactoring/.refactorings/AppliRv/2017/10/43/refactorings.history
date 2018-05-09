@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;fr.AppliRV.vues.t.java&apos; to &apos;VuePraticienHesitant.java&apos;&#x0A;- Original project: &apos;AppliRv&apos;&#x0A;- Original element: &apos;fr.AppliRV.vues.t.java&apos;&#x0A;- Renamed element: &apos;fr.AppliRV.vues.VuePraticienHesitant.java&apos;" description="Rename compilation unit &apos;t.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;fr.AppliRV.vues{t.java" name="VuePraticienHesitant.java" references="false" stamp="1508938303600" version="1.0"/>
+</session>
