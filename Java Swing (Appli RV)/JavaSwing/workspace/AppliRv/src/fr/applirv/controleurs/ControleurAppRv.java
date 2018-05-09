@@ -10,13 +10,10 @@ import fr.applirv.vues.VueAppRV;
 import fr.applirv.vues.VueAuthentification;
 import fr.applirv.vues.VueListePraticiens;
 
-
 public class ControleurAppRv implements ActionListener {
-
 	private VueAppRV vue;
 	
 	public ControleurAppRv(VueAppRV vue){
-
 		super();
 		
 		//mémorise la vue associée
@@ -24,12 +21,10 @@ public class ControleurAppRv implements ActionListener {
 		
 		//Se met à l'écoute des items de menu
 		this.enregistrerEcouteur();
-
 	}
 
 
 	private void enregistrerEcouteur(){
-
 		// Se met à l'écoute de l'item de menu "Se connecter"
 		this.vue.getItemSeConnecter().addActionListener(this) ;
 		
@@ -47,18 +42,17 @@ public class ControleurAppRv implements ActionListener {
 		
 		// se met à l'écoute de l'item de menu 
 		this.vue.getItemPraticiensCoeffConfiance().addActionListener(this);
-
 		// se met à l'écoute de l'item de menu 
 		this.vue.getItemPraticiensTemps().addActionListener(this);
-
 		// se met à l'écoute de l'item de menu 
 		this.vue.getItemPraticiensCoeffNotoriete().addActionListener(this);
-	
+		
+		
 	}
 	
 	
+	
 	public void actionPerformed(ActionEvent e) {
-
 		// Obtient le composant graphique source de l'événement ("clic")
 		Object sourceEvenement = e.getSource() ;
 		
@@ -96,20 +90,17 @@ public class ControleurAppRv implements ActionListener {
 			//System.out.println("vueListeLivreur");
 		}
 		
+		
+		
 	}
 	
-
 	private void seConnecter(){
-
-		// Affiche la VueAuthentification (Formulaire de Connexion)
+		// Affiche la vue dédiée à la connexion (formulaire de connexion)
 		new VueAuthentification(this.vue);
-
 	}
 	
-
 	private void seDeconnecter(){
-
-		// Affiche la boite de dialogue de déconnexion
+		// Demande confirmation à l'utilisateur au moyen d'une boîte de dialogue
 		int reponse = JOptionPane.showConfirmDialog(this.vue, "Voulez-vous vraiment vous déconnecter ?","Déconnexion",JOptionPane.YES_NO_OPTION) ;
 		
 		// Si l'utilateur confirme...
@@ -121,12 +112,9 @@ public class ControleurAppRv implements ActionListener {
 			
 			JOptionPane.showMessageDialog(null, "Vous êtes maintenant déconnecté.","Déconnexion",JOptionPane.INFORMATION_MESSAGE) ;
 		}
-
 	}
 	
-
 	private void quitter(){
-
 		// Demande confirmation à l'utilisateur au moyen d'une boîte de dialogue
 		int reponse = JOptionPane.showConfirmDialog(this.vue, "Voulez-vous vraiment quitter ?","Quitter",JOptionPane.YES_NO_OPTION) ;
 		
@@ -135,15 +123,9 @@ public class ControleurAppRv implements ActionListener {
 			// Met fin à l'application
 			System.exit(0) ;
 		}
-
 	}
 	
-
 	private void afficherApropos(){
-
 		JOptionPane.showMessageDialog(this.vue, "GSB\n AppRv","À propos...",JOptionPane.INFORMATION_MESSAGE) ;
-
 	}
-
-
 }

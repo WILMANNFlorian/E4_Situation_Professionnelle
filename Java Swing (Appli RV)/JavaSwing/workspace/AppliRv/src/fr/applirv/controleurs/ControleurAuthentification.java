@@ -15,87 +15,82 @@ import fr.applirv.vues.VueAuthentification;
 
 
 public class ControleurAuthentification implements ActionListener {
-
-	// Utilisation de la vue vueAuthentification
 	private VueAuthentification vue;
 	
 	
 	public ControleurAuthentification(VueAuthentification vue){
-
-		// Appel le constructeur parent
 		super();
 		
 		this.vue = vue;
 		this.enregisterEcouteur();
-
 	}
 	
-
 	private void enregisterEcouteur(){
-
-		// Enregiste l'écouteur Connecter
+		//enregister ecouteur se connecter et annuler 
+		
 		this.vue.getbConnecter().addActionListener(this);
-
-		// Enregistre l'écouteur Annuler
 		this.vue.getbAnnuler().addActionListener(this);
-
 	}
 	
 	
+	// faire avec la base de donnée ci dessous -->
+	@Override
 	public void actionPerformed(ActionEvent e){
-
 		Object sourceEvenement = e.getSource() ;
 		
 		if( sourceEvenement == this.vue.getbConnecter() ){
-
 			String visMatricule = this.vue.getTfVisMatricule().getText() ;
 			String visMdp = new String(this.vue.getPfVisMdp().getPassword()) ;
 		
+		
 			boolean connexionOk;
-
 			try {
+				//System.out.println("test1");
 				
 				connexionOk = ModeleAppliRV.seConnecter( visMatricule , visMdp );
 				
-				// Si la connexion est bonne
+				//System.out.println("test1");
+				
 				if(connexionOk){
 					
-					// Affiche la boite de dialogue "Connexion réussie"
+					//System.out.println("test2");
+					
 					JOptionPane.showMessageDialog(this.vue, "Connexion réussie.","Authentification",JOptionPane.INFORMATION_MESSAGE) ;
 					this.vue.dispose() ;
 					VueAppRV vueParente = (VueAppRV) this.vue.getParent() ;
 					vueParente.setBarreMenusModeConnecte() ;
 					
-					// Ouvrir la session Visiteur
+					//ouverture session
 					
 					Visiteur leVisiteur = new Visiteur(visMatricule,visMdp);
 					Session.ouvrir(leVisiteur);
 					
 				}
-
 				else{
-
 					JOptionPane.showMessageDialog(this.vue, "Connexion refusée.","Authentification",JOptionPane.ERROR_MESSAGE) ;
 					this.vue.initialiser() ;
-
 				}
 				
 				
 			} catch (Exception e1) {
-
 				e1.printStackTrace();
 				
+				
+				//System.out.println("test erreur");
 			}
 			
+			
+			
+			
 		}
-
 		else if( sourceEvenement == this.vue.getbAnnuler() ){
-
 			this.vue.dispose() ;
-
 		}
 		
 	}
-
-
+	
+	
+	
+	
+	
 }

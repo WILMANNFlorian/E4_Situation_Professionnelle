@@ -1,0 +1,19 @@
+package fr.applirv.vues;
+
+import javax.swing.JPanel;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+
+public class VueAccueil extends JPanel {
+
+	public VueAccueil(){
+		super() ;
+		setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel = new JPanel();
+		add(panel);
+
+	}
+
+}

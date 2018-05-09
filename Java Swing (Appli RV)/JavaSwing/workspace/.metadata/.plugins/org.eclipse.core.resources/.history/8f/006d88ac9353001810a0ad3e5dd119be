@@ -1,0 +1,17 @@
+package fr.applirv.vues;
+
+import javax.swing.JPanel;
+import javax.swing.JInternalFrame;
+
+public class VueAccueil extends JPanel {
+
+	public VueAccueil(){
+		super() ;
+		
+		JInternalFrame internalFrame = new JInternalFrame("New JInternalFrame");
+		add(internalFrame);
+		internalFrame.setVisible(true);
+
+	}
+
+}

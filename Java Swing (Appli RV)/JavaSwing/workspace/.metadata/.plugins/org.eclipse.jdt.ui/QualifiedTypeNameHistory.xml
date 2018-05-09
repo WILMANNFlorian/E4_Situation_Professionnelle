@@ -28,4 +28,6 @@
 <fullyQualifiedTypeName name="fr.AppliRV.entites.RapportVisite"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="fr.gsb.rv.controleurs.ControleurBoutonVoirVisiteur"/>
+<fullyQualifiedTypeName name="java.awt.Image"/>
+<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
 </qualifiedTypeNameHistroy>

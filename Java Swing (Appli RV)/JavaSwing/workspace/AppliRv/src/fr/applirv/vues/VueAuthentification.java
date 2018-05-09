@@ -6,17 +6,18 @@ import javax.swing.*;
 
 import fr.applirv.controleurs.ControleurAuthentification;
 
-
 public class VueAuthentification extends JDialog {
 
+		 
+
 		VueAppRV vueParente;
+		
 		ControleurAuthentification controleur;
 		
 		private JTextField tfVisMatricule = new JTextField() ;
 		private JPasswordField pfVisMdp = new JPasswordField();
-		private JButton btnConnecter = new JButton("Se connecter") ;
-		private JButton btnAnnuler = new JButton("Annuler") ;
-
+		private JButton bConnecter = new JButton("Se connecter") ;
+		private JButton bAnnuler = new JButton("Annuler") ;
 		
 		public VueAuthentification (VueAppRV vueParente){
 			
@@ -25,11 +26,11 @@ public class VueAuthentification extends JDialog {
 			super(vueParente,"Authentification",true) ;
 			
 			// Mémorise la vue parente qui est la fenêtre principale de l'application
-			this.vueParente = vueParente ;			
+			this.vueParente = vueParente ;
 			
-			// Creation de la page de connexion
-			this.creationPageConnexion();
-
+			
+			//creation de la page de connexion
+			this.creationPageCo();
 			// Redimensionne la boîte de dialogue (dimensions adaptées aux composants qui s'y trouvent)
 			this.pack() ;
 			
@@ -39,7 +40,8 @@ public class VueAuthentification extends JDialog {
 			// Empêche le redimensionnement par l'utilisateur
 			this.setResizable(false);
 			
-			// Crée le controleur associé et lui indique que le vue qui lui est associée est elle-même
+			// Crée le controleur associé et lui indique que le vue qui lui
+			// est associée est elle-même
 			this.controleur = new ControleurAuthentification(this) ;
 			
 			// Affiche la boîte de dialogue
@@ -58,7 +60,7 @@ public class VueAuthentification extends JDialog {
 			
 		}
 		
-		private void creationPageConnexion(){
+		private void creationPageCo(){
 			
 			Container conteneur = this.getContentPane();
 			
@@ -69,8 +71,8 @@ public class VueAuthentification extends JDialog {
 			Box boxLigne = Box.createHorizontalBox() ;
 			Box boxActions = Box.createHorizontalBox() ;
 			
-			boxEtiquettes.add( Box.createVerticalStrut(10) ) ;
 			boxEtiquettes.add(new JLabel("Login : ")) ;
+			boxEtiquettes.add( Box.createVerticalStrut(10) ) ;
 			boxEtiquettes.add(new JLabel("MDP : ")) ;
 			
 			boxSaisies.add( this.tfVisMatricule) ;
@@ -82,10 +84,11 @@ public class VueAuthentification extends JDialog {
 			boxLigne.add( Box.createHorizontalStrut( 10 ) ) ;
 			
 			boxActions.add( Box.createHorizontalStrut( 10 ) ) ;
-			boxActions.add( this.btnConnecter ) ;
+			boxActions.add( this.bConnecter ) ;
 			boxActions.add( Box.createHorizontalStrut( 10 ) ) ;
-			boxActions.add( this.btnAnnuler ) ;
+			boxActions.add( this.bAnnuler ) ;
 			boxActions.add( Box.createHorizontalStrut( 10 ) ) ;
+			
 			
 			boxChamps.add( Box.createHorizontalStrut( 10 ) ) ;
 			boxChamps.add( boxEtiquettes ) ;
@@ -113,12 +116,12 @@ public class VueAuthentification extends JDialog {
 			return pfVisMdp;
 		}
 
-		public JButton getbtnConnecter() {
-			return btnConnecter;
+		public JButton getbConnecter() {
+			return bConnecter;
 		}
 
-		public JButton getbtnAnnuler() {
-			return btnAnnuler;
+		public JButton getbAnnuler() {
+			return bAnnuler;
 		}
 
 }
