@@ -1,16 +1,12 @@
 package fr.gsb.rv;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
-import java.util.GregorianCalendar;
-import java.util.List;
 
 public class RechercherRvActivity extends AppCompatActivity{
 
@@ -46,10 +42,43 @@ public class RechercherRvActivity extends AppCompatActivity{
 
     public void afficher(View vue){
 
-        // Création du paquet
+        String moisChoisi = (String) spinnerMois.getSelectedItem();
+
+        switch (moisChoisi) {
+
+            case "Janvier" : moisChoisi = "1";
+                break;
+            case "Février" : moisChoisi = "2";
+                break;
+            case "Mars":  moisChoisi = "3";
+                break;
+            case "Avril" :  moisChoisi = "4";
+                break;
+            case "Mai":  moisChoisi = "5";
+                break;
+            case "Juin":  moisChoisi = "6";
+                break;
+            case "Juillet": moisChoisi = "7";
+                break;
+            case "Août":  moisChoisi = "8";
+                break;
+            case "Septembre": moisChoisi = "9";
+                break;
+            case "Octobre" :
+                moisChoisi = "10";
+                break;
+            case "Novembre" :
+                moisChoisi = "11";
+                break;
+            case "Décembre" :
+                moisChoisi = "12";
+                break;
+        }
+
+        // Création du Bundle
         Bundle paquet = new Bundle();
         paquet.putString("annee", spinnerAnnee.getSelectedItem().toString());
-        paquet.putString("mois", spinnerMois.getSelectedItem().toString());
+        paquet.putString("mois", moisChoisi);
 
         // Envoie du paquet à ListeRvActivity
         Intent intentAfficher = new Intent(this, ListRapportRvActivity.class);

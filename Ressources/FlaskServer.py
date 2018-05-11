@@ -87,7 +87,7 @@ def getLesRapportsVisite(idV, mois, annee) :
 	# Obtenir un curseur
 	curseur = connexionBD.cursor()
 	# Exécuter la requête
-	curseur.execute( 'Select R.VIS_MATRICULE, R.RAP_NUM, R.PRA_NUM, R.RAP_BILAN, R.RAP_VU, R.RAP_DATE, R.RAP_MOTIF, R.RAP_COEFCONFIANCE, P.PRA_NOM, P.PRA_PRENOM From RAPPORT_VISITE R INNER JOIN PRATICIEN P ON R.PRA_NUM = P.PRA_NUM '
+	curseur.execute( 'Select R.VIS_MATRICULE, R.RAP_NUM, R.PRA_NUM, R.RAP_BILAN, R.RAP_VU, CONVERT(R.RAP_DATE, CHAR), R.RAP_MOTIF, R.RAP_COEFCONFIANCE, P.PRA_NOM, P.PRA_PRENOM From RAPPORT_VISITE R INNER JOIN PRATICIEN P ON R.PRA_NUM = P.PRA_NUM '
 					+'Where MONTH(RAP_DATE) = %s AND YEAR(RAP_DATE) = %s AND VIS_MATRICULE = %s' , (mois, annee, idV))
 	# Lire tous les tuples qui résultent de l'exécution de la requête
 	tuples = curseur.fetchall()
@@ -107,8 +107,16 @@ def getLesRapportsVisite(idV, mois, annee) :
 	else :
 		for unTuple in tuples :
 		# Convertir le tuple en un RV (tableau associatif)
-			unRv = { 'VIS_MATRICULE': unTuple[0] , 'RAP_NUM': unTuple[1] , 'PRA_NUM': unTuple[2], 'RAP_BILAN': unTuple[3],
-			'RAP_VU': unTuple[4], 'RAP_DATE': str(unTuple[5]), 'RAP_MOTIF': unTuple[6], 'RAP_COEFCONFIANCE': unTuple[7], 'NomP' : unTuple[8], 'PrenomP' : unTuple[9]}
+			unRv = { 'matricule': unTuple[0] ,
+					 'rap_n': unTuple[1] ,
+					 'pra_n': unTuple[2],
+					 'bilan': unTuple[3],
+					 'vu': unTuple[4],
+					 'date': str(unTuple[5]), 
+					 'motif': unTuple[6], 
+					 'coeff_confiance': unTuple[7], 
+					 'NomP' : unTuple[8], 
+					 'PrenomP' : unTuple[9]}
 			# Ajouter le dictionnaire dans la liste des RV
 			RapportsVisites.append( unRv )
 
@@ -219,4 +227,4 @@ def getPraticiens() :
 # Programme principal
 if __name__ == "__main__" :
 	# Démarrer le serveur
-	app.run( debug = True , host = '192.168.220.130' , port = 5000 )
+	app.run( debug = True , host = '192.168.1.20' , port = 5000 )

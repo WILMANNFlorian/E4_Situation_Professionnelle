@@ -1,6 +1,5 @@
 package fr.gsb.rv.entites;
 
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,45 +8,52 @@ public class RapportVisite {
 	private int numero ;
 	private String bilan ;
 	private int coefConfiance ;
-	private GregorianCalendar dateVisite ;
-	private GregorianCalendar dateRedaction ;
-	private boolean lu ;
-	
-	private Praticien lePraticien ;
+	private String dateVisite ;
+	private int lu ;
+
+	private int lePraticien ;
 	private Visiteur leVisiteur ;
-	private Motif leMotif ;
+	private String leMotif ;
 	private Map<Medicament,Integer> lesEchantillons = new HashMap<Medicament,Integer>() ;
-	
+
 	public RapportVisite() {
 		super();
 	}
 
 	public RapportVisite(int numero, String bilan, int coefConfiance,
-			GregorianCalendar dateVisite, GregorianCalendar dateRedaction,
-			boolean lu) {
+						 String dateVisite,int lu) {
 		super();
 		this.numero = numero;
 		this.bilan = bilan;
 		this.coefConfiance = coefConfiance;
 		this.dateVisite = dateVisite;
-		this.dateRedaction = dateRedaction;
 		this.lu = lu;
 	}
 
 	public RapportVisite(int numero, String bilan, int coefConfiance,
-			GregorianCalendar dateVisite, GregorianCalendar dateRedaction,
-			boolean lu, Praticien lePraticien, Visiteur leVisiteur,
-			Motif leMotif) {
+						 String dateVisite,int lu, int lePraticien, Visiteur leVisiteur, String leMotif) {
 		super();
 		this.numero = numero;
 		this.bilan = bilan;
 		this.coefConfiance = coefConfiance;
 		this.dateVisite = dateVisite;
-		this.dateRedaction = dateRedaction;
 		this.lu = lu;
 		this.lePraticien = lePraticien;
 		this.leVisiteur = leVisiteur;
-		this.leMotif = leMotif;
+		this.leMotif = leMotif ;
+	}
+
+
+	public RapportVisite(int numero, String bilan, int coefConfiance,
+						 String dateVisite,int lu, String leMotif, int praticien) {
+		super();
+		this.numero = numero;
+		this.bilan = bilan;
+		this.coefConfiance = coefConfiance;
+		this.dateVisite = dateVisite;
+		this.lu = lu;
+		this.leMotif = leMotif ;
+		this.lePraticien = praticien;
 	}
 
 	public int getNumero() {
@@ -74,35 +80,27 @@ public class RapportVisite {
 		this.coefConfiance = coefConfiance;
 	}
 
-	public GregorianCalendar getDateVisite() {
+	public String getDateVisite() {
 		return dateVisite;
 	}
 
-	public void setDateVisite(GregorianCalendar dateVisite) {
+	public void setDateVisite(String dateVisite) {
 		this.dateVisite = dateVisite;
 	}
 
-	public GregorianCalendar getDateRedaction() {
-		return dateRedaction;
-	}
-
-	public void setDateRedaction(GregorianCalendar dateRedaction) {
-		this.dateRedaction = dateRedaction;
-	}
-
-	public boolean isLu() {
+	public int isLu() {
 		return lu;
 	}
 
-	public void setLu(boolean lu) {
+	public void setLu(int lu) {
 		this.lu = lu;
 	}
 
-	public Praticien getLePraticien() {
+	public int getLePraticien() {
 		return lePraticien;
 	}
 
-	public void setLePraticien(Praticien lePraticien) {
+	public void setLePraticien(int lePraticien) {
 		this.lePraticien = lePraticien;
 	}
 
@@ -114,11 +112,11 @@ public class RapportVisite {
 		this.leVisiteur = leVisiteur;
 	}
 
-	public Motif getLeMotif() {
+	public String getLeMotif() {
 		return leMotif;
 	}
 
-	public void setLeMotif(Motif leMotif) {
+	public void setLeMotif(String leMotif) {
 		this.leMotif = leMotif;
 	}
 
@@ -126,13 +124,16 @@ public class RapportVisite {
 		return lesEchantillons;
 	}
 
-	public void setLesEchantillons(Map<Medicament, Integer> lesEchantillons) {
-		this.lesEchantillons = lesEchantillons;
-	}
+
 
 	@Override
 	public String toString() {
-		return "[" + numero + "] " + lePraticien.getNom() ;
+		return "RapportVisite{" +
+				"numero=" + numero +
+				", bilan='" + bilan + '\'' +
+				", coefConfiance=" + coefConfiance +
+				", dateVisite='" + dateVisite + '\'' +
+				", lu=" + lu +
+				'}';
 	}
-	
 }

@@ -1,19 +1,8 @@
 package fr.gsb.rv.modeles;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import fr.gsb.rv.entites.Medicament;
-import fr.gsb.rv.entites.Motif;
-import fr.gsb.rv.entites.Praticien;
-import fr.gsb.rv.entites.RapportVisite;
-import fr.gsb.rv.entites.Visiteur;
-
 public class ModeleGsb {
 
-	private static ModeleGsb modele = null ;
+	/*private static ModeleGsb modele = null ;
 
 	private List<Visiteur> lesVisiteurs = new ArrayList<Visiteur>() ;
 	private List<Medicament> lesMedicaments = new ArrayList<Medicament>() ;
@@ -137,5 +126,5 @@ public class ModeleGsb {
 		}
 
 		return rapports ;
-	}
+	}*/
 }

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import fr.gsb.rv.technique.Session;
+
 public class MenuRvActivity extends AppCompatActivity {
 
     TextView textViewIdentifiant;
@@ -27,17 +29,19 @@ public class MenuRvActivity extends AppCompatActivity {
         btnRetour = (Button) findViewById(R.id.btnRetour) ;
 
         // Récupération du Bundle
-        Bundle paquet = this.getIntent().getExtras();
+        /*Bundle paquet = this.getIntent().getExtras();
         String nom = paquet.getString("nom");
-        String prenom = paquet.getString("prenom");
-
+        String prenom = paquet.getString("prenom");*/
+        String visi = "Bienvenue " + Session.getSession().getLeVisiteur().getNom()+" "+Session.getSession().getLeVisiteur().getPrenom() + ".";
+        textViewIdentifiant.setText(visi);
         // Affichage de l'Identifiant
-        textViewIdentifiant.setText("Vous êtes connecté(e) en tant que : " + nom + " " + prenom );
+        // textViewIdentifiant.setText("Vous êtes connecté(e) en tant que : " + nom + " " + prenom );
 
     }
 
 
     public void consulter(View vue){
+
 
         Intent intentionEnvoyer = new Intent(this, RechercherRvActivity.class);
         startActivity(intentionEnvoyer);

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tVMotifRapport"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tVBilan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="70dp"
+        android:text="Bilan :" />
+
+    <TextView
+        android:id="@+id/tVCoefficient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tVBilan"
+        android:layout_below="@+id/tVBilan"
+        android:layout_marginTop="22dp"
+        android:text="Coefficient :" />
+
+    <TextView
+        android:id="@+id/tVDateVisite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tVCoefficient"
+        android:layout_below="@+id/tVCoefficient"
+        android:layout_marginTop="23dp"
+        android:text="Date Visite :" />
+
+    <TextView
+        android:id="@+id/tVDateRedaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tVDateVisite"
+        android:layout_below="@+id/tVDateVisite"
+        android:layout_marginTop="25dp"
+        android:text="Date Redaction :" />
+
+    <TextView
+        android:id="@+id/tVPraticien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tVDateRedaction"
+        android:layout_below="@+id/tVDateRedaction"
+        android:layout_marginTop="22dp"
+        android:text="Praticien :" />
+
+    <TextView
+        android:id="@+id/tVModif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tVPraticien"
+        android:layout_below="@+id/tVPraticien"
+        android:layout_marginTop="20dp"
+        android:text="Motif :" />
+
+    <TextView
+        android:id="@+id/tVRapport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tVBilan"
+        android:layout_marginTop="14dp"
+        android:text="Rapport n°" />
+
+    <TextView
+        android:id="@+id/tVBilanRapport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tVCoefficient"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/tVDateRedaction" />
+
+    <TextView
+        android:id="@+id/tVCoefficientRapport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tVBilanRapport"
+        android:layout_alignTop="@+id/tVCoefficient" />
+
+    <TextView
+        android:id="@+id/tVDateVisiteRapport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tVDateVisite"
+        android:layout_alignStart="@+id/tVCoefficientRapport" />
+
+    <TextView
+        android:id="@+id/tVDateRedactionRapport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tVPraticien"
+        android:layout_alignStart="@+id/tVDateVisiteRapport" />
+
+    <TextView
+        android:id="@+id/tVPraticienRapport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tVDateRedactionRapport"
+        android:layout_alignTop="@+id/tVPraticien" />
+
+    <TextView
+        android:id="@+id/tVMotifRapport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tVModif"
+        android:layout_alignBottom="@+id/tVModif"
+        android:layout_alignStart="@+id/tVPraticienRapport" />
+
+    <TextView
+        android:id="@+id/tVRapportRapport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tVRapport"
+        android:layout_alignBottom="@+id/tVRapport"
+        android:layout_toEndOf="@+id/tVBilanRapport" />
+
+</RelativeLayout>

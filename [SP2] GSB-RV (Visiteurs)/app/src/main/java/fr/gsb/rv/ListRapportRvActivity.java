@@ -5,32 +5,41 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
+import fr.gsb.rv.entites.RapportAdapter;
 import fr.gsb.rv.entites.RapportVisite;
-import fr.gsb.rv.modeles.ModeleGsb;
-
+import fr.gsb.rv.entites.RapportVisiteParce;
+import fr.gsb.rv.technique.Session;
 
 
 public class ListRapportRvActivity extends AppCompatActivity {
-
-    //A REMPLACER PAR DATA SERVER
-    private List<RapportVisite> listRapport = ModeleGsb.getInstance().getLesRapportsVisites() ;
 
     ListView laListe ;
     TextView tvList ;
     TextView tvRapportSelec;
     Button btnConsuler ;
 
-    RapportVisite rapportSelectionne ;
-
+    List<RapportVisite> lesRaps = new ArrayList<RapportVisite>();
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,88 +52,86 @@ public class ListRapportRvActivity extends AppCompatActivity {
         String mois = paquet.getString("mois") ;
         String annee = paquet.getString("annee") ;
 
-        // Création des variables par rapport à List_rapport_visite_rv.xml
-        laListe = (ListView) findViewById(R.id.lvListRapports);
-        tvList = (TextView) findViewById(R.id.tvListRapports) ;
-        tvRapportSelec = (TextView) findViewById(R.id.tvRapportSelec);
-        btnConsuler = (Button) findViewById(R.id.btnConsulter);
+        final ListView listView = (ListView) findViewById(R.id.lvListRapports);
+        final String encoder;
 
-        // Masquer le bouton Consulter
-        btnConsuler.setVisibility(View.GONE);
+        try {
 
-        // Liste temporaire qui contiendra les RapportVisites correspondant à la date du Bundle
-        final List<RapportVisite> elList = new ArrayList<>();
+            String lv = Session.getSession().getLeVisiteur().getMatricule()+"."+mois+"."+annee ;
+            encoder = URLEncoder.encode(lv, "UTF-8");
+            // String url = String.format("http://192.168.43.71:5000/listeRV/%s", encoder);
+            String url = String.format("http://192.168.1.20:5000/listeRV/%s", encoder);
 
+            Response.Listener<JSONArray> ecouteur = new Response.Listener<JSONArray>() {
 
-        // Récupérer élément de la liste par rapport au mois et année
-        for(RapportVisite rv : listRapport){
-
-            String month;
-            int MM = rv.getDateVisite().get(Calendar.MONTH);
-            String AAAA = Integer.toString( rv.getDateVisite().get(Calendar.YEAR) ) ;
-
-            switch (MM) {
-
-                case 0:  month = "Janvier";
-                    break;
-                case 1:  month = "Février";
-                    break;
-                case 2:  month = "Mars";
-                    break;
-                case 3:  month = "Avril";
-                    break;
-                case 4:  month = "Mai";
-                    break;
-                case 5:  month = "Juin";
-                    break;
-                case 6:  month = "Juillet";
-                    break;
-                case 7:  month = "Août";
-                    break;
-                case 8:  month = "Septembre";
-                    break;
-                case 9: month = "Octobre";
-                    break;
-                case 10: month = "Novembre";
-                    break;
-                case 11: month = "Décembre";
-                    break;
-                default: month = " ";
-
-            }
-
-            if (AAAA.equals(annee) & month.equals(mois)){
-
-                // Récupération de l'élement
-                elList.add(rv);
-
-            }
+                @Override
+                public void onResponse(JSONArray response) {
 
 
-        }
+                    for (int i = 0 ; i < response.length(); i++){
 
-        // Création de l'adaptateur
-        ArrayAdapter<RapportVisite> adaptateur = new ArrayAdapter<RapportVisite>(this ,android.R.layout.simple_list_item_1 ,elList);
-        laListe.setAdapter(adaptateur);
+                        try {
 
-        // Création du Listener
-        laListe.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
+                            JSONObject jsonObject = response.getJSONObject(i);
 
-                    public void onItemClick(AdapterView<?> parent, View vue, int position, long id)
-                    {
-                        btnConsuler.setVisibility(View.VISIBLE);
+                            lesRaps.add(new RapportVisite(jsonObject.getInt("rap_n"),
+                                                          jsonObject.getString("bilan"),
+                                                          jsonObject.getInt("coeff_confiance"),
+                                                          jsonObject.getString("date"),
+                                                          1,
+                                                          jsonObject.getString("motif"),
+                                                          jsonObject.getInt("pra_n")
+                             ));
 
-                        rapportSelectionne = elList.get(position);
+                            final RapportAdapter rapportAdapter = new RapportAdapter(ListRapportRvActivity.this, lesRaps);
 
-                        tvRapportSelec.setText(" "+rapportSelectionne.toString());
+                            listView.setAdapter(rapportAdapter);
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                    RapportVisite rapportVisite = lesRaps.get(i);
+                                    RapportVisiteParce rap = new RapportVisiteParce(rapportVisite.getNumero(),
+                                                                                    rapportVisite.getBilan(),
+                                                                                    rapportVisite.getCoefConfiance(),
+                                                                                    rapportVisite.getDateVisite(),
+                                                                                    rapportVisite.isLu(),
+                                                                                    rapportVisite.getLeMotif(),
+                                                                                    rapportVisite.getLePraticien());
+
+                                    Intent intentAfficher = new Intent(ListRapportRvActivity.this, VisuRvActivity.class);
+                                    intentAfficher.putExtra("rapportVisite", rap);
+                                    startActivity(intentAfficher);
+
+                                }
+                            });
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-        );
+            };
+
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Toast.makeText(ListRapportRvActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                }
+            };
+
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, ecouteur, errorListener);
+            RequestQueue requestQueue = Volley.newRequestQueue(ListRapportRvActivity.this);
+            requestQueue.add(jsonArrayRequest);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    /*      FAIL
+
     public JSONObject rapportToJSON (RapportVisite rapport){
 
         // Création d'un object JSON
@@ -132,44 +139,23 @@ public class ListRapportRvActivity extends AppCompatActivity {
 
         // Implémentation de l'object JSON
         try {
-            object.put("numero",rapportSelectionne.getNumero());
-            object.put("bilan", rapportSelectionne.getBilan();
-            object.put("coefConfiance",rapportSelectionne.getCoefConfiance());
-            object.put("dateVisite", rapportSelectionne.getDateVisite());
-            object.put("dateRedaction", rapportSelectionne.getDateRedaction());
-            object.put("lu", rapportSelectionne.isLu());
-            object.put("lePraticien", rapportSelectionne.getLePraticien());
-            object.put("leVisiteur", rapportSelectionne.getLeVisiteur());
-            object.put("leMotif", rapportSelectionne.getLeMotif());
-            object.put("lesEchantillons", rapportSelectionne.getLesEchantillons());
+            object.put("numero",rapport.getNumero());
+            object.put("bilan", rapport.getBilan());
+            object.put("coefConfiance",rapport.getCoefConfiance());
+            object.put("dateVisite", rapport.getDateVisite());
+            object.put("lu", rapport.isLu());
+            object.put("lePraticien", rapport.getLePraticien());
+            object.put("leVisiteur", rapport.getLeVisiteur());
+            object.put("leMotif", rapport.getLeMotif());
+            object.put("lesEchantillons", rapport.getLesEchantillons());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Toast.makeText(ListRapportRvActivity.this, "Je suis la rapportToJson", Toast.LENGTH_LONG).show();
 
-        System.out.println(object.toString()); //ok
         return object;
 
     }
-    */
-
-    public void consulter (View vue){
-
-        // Création du Bundle
-        Bundle paquet = new Bundle();
-        //JSONObject rapportJson =  rapportToJSON(rapportSelectionne);
-        //paquet.putString("rapportJson", rapportJson.toString());
-        paquet.putInt("Numero", rapportSelectionne.getNumero());
-
-
-        // Envoie du Bundle
-        Intent intentAfficher = new Intent(this, VisuRvActivity.class);
-        intentAfficher.putExtras(paquet);
-        startActivity(intentAfficher);
-
-
-
-    }
-
 
 }

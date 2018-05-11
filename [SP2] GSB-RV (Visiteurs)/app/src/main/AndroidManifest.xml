@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.gsb.rv">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -18,8 +20,8 @@
         <activity android:name=".MenuRvActivity" />
         <activity android:name=".RechercherRvActivity" />
         <activity android:name=".ListRapportRvActivity" />
-        <activity android:name=".technique.VisuRvActivity" />
-        <activity android:name=".VisuRvActivity"></activity>
+        <activity android:name=".VisuRvActivity" />
+
     </application>
 
 </manifest>

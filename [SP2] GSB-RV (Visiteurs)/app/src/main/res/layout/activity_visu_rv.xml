@@ -105,7 +105,7 @@
         android:layout_alignTop="@+id/tVPraticien" />
 
     <TextView
-        android:id="@+id/tVMotifRapport"
+        android:id="@+id/tVMotif_Rapport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/tVModif"
