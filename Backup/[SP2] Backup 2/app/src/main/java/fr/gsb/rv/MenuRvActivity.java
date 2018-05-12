@@ -20,7 +20,7 @@ public class MenuRvActivity extends AppCompatActivity {
 
         // Instanciation
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_rv);
+        setContentView(R.layout.activity_menu_rv0);
 
         // Création des variables par rapport à activity_menu_rv.xml
         textViewIdentifiant = (TextView) findViewById( R.id.tvSession ) ;
@@ -28,8 +28,14 @@ public class MenuRvActivity extends AppCompatActivity {
         btnSaisir = (Button) findViewById(R.id.btnSaisir) ;
         btnRetour = (Button) findViewById(R.id.btnRetour) ;
 
+        // Récupération du Bundle
+        /*Bundle paquet = this.getIntent().getExtras();
+        String nom = paquet.getString("nom");
+        String prenom = paquet.getString("prenom");*/
         String visi = "Bienvenue " + Session.getSession().getLeVisiteur().getNom()+" "+Session.getSession().getLeVisiteur().getPrenom() + ".";
         textViewIdentifiant.setText(visi);
+        // Affichage de l'Identifiant
+        // textViewIdentifiant.setText("Vous êtes connecté(e) en tant que : " + nom + " " + prenom );
 
     }
 

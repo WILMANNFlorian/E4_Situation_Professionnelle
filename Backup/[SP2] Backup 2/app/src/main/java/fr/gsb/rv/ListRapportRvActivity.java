@@ -132,10 +132,7 @@ public class ListRapportRvActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    /*public JSONObject rapportToJSON (RapportVisite rapport){
+    public JSONObject rapportToJSON (RapportVisite rapport){
 
         // Création d'un object JSON
         JSONObject object = new JSONObject();
@@ -159,6 +156,6 @@ public class ListRapportRvActivity extends AppCompatActivity {
 
         return object;
 
-    }*/
+    }
 
 }

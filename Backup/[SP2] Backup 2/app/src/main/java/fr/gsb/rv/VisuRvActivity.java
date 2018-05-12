@@ -30,6 +30,7 @@ public class VisuRvActivity extends AppCompatActivity {
     String bilan;
     int coefConfiance;
     GregorianCalendar dateVisite;
+    GregorianCalendar dateRedaction;
     boolean lu;
 
     Praticien lePraticien;

@@ -7,6 +7,7 @@ import android.os.Parcelable;
 
 public class RapportVisiteParce implements Parcelable {
 
+
     private int numero ;
     private String bilan ;
     private int coefConfiance ;
