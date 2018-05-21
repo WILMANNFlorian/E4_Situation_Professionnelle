@@ -12,6 +12,8 @@ public class ModeleListePraticiensDate extends AbstractTableModel{
 	ArrayList<Praticien> lesPraticiens = (ArrayList<Praticien>) new ModeleAppliRV().getModele().getLesPraticiensDate();
 	private final String[] entetes = { "Nom" , "Prénom" , "Ville", "Confiance (coef)","Notoriété (coef)","Spécialité","Date de visite"} ;
 
+
+
 	public ModeleListePraticiensDate() {
 		super();
 	}
@@ -29,6 +31,7 @@ public class ModeleListePraticiensDate extends AbstractTableModel{
 	public String getColumnName(int columnIndex) {
 		return entetes[columnIndex];
 	}
+
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {

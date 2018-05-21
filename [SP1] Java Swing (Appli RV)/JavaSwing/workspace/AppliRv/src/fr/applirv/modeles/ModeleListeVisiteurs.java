@@ -26,6 +26,7 @@ public class ModeleListeVisiteurs extends AbstractTableModel {
 		super();
 	}
 
+
 	@Override
 	public int getRowCount() {
 		int lignes = lesVisiteurs.size();
@@ -53,6 +54,7 @@ public class ModeleListeVisiteurs extends AbstractTableModel {
 		}
 	}
 	
+
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch ( columnIndex ){
@@ -62,12 +64,12 @@ public class ModeleListeVisiteurs extends AbstractTableModel {
 			case 3 :
 				return String.class;
 			case 4 :
-				//return JButton.class;
 				return String.class;
 				
 		}
 		return null;
 	}
+
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {

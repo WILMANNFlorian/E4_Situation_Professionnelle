@@ -13,12 +13,11 @@ public class ModeleListeRv extends AbstractTableModel{
 	private final String[] entetes = { "Matricule visiteur" , "Matricule Praticien" , "Numéro", "Date","Voir RV"} ;
 	private ArrayList<RapportVisite> lesRv;
 	
-	//String[] lesDonneesRv;
+	
 	
 	public ModeleListeRv(ArrayList<RapportVisite> lesRv) {
 		super();
 		this.lesRv = lesRv;
-		//this.lesDonneesRv = lesDonneesRv;
 	}
 
 	@Override
@@ -57,7 +56,6 @@ public class ModeleListeRv extends AbstractTableModel{
 			case 3 :
 				return String.class;
 			case 4 :
-				//return JButton.class;
 				return String.class;
 				
 		}
@@ -76,10 +74,7 @@ public class ModeleListeRv extends AbstractTableModel{
 			case 3 : 
 				return lesRv.get(rowIndex).getDate();
 			case 4 : 
-				//return "Voir le RV";
-				//String rapVu = ;
 				if(ModeleAppliRV.getModele().getVuRapportVisite(lesRv.get(rowIndex).getNumero())){
-				//if(lesRv.get(rowIndex).getVu().equals("oui")){
 					return "Voir le RV \n( VU )";
 				}
 				else{

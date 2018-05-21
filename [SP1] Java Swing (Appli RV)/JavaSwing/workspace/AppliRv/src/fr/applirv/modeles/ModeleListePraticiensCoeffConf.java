@@ -12,11 +12,13 @@ public class ModeleListePraticiensCoeffConf extends AbstractTableModel {
 
 	
 	ArrayList<Praticien> lesPraticiens = (ArrayList<Praticien>) new ModeleAppliRV().getModele().getLesPraticiensCoeffConf();
-	private final String[] entetes = { "Nom" , "Prénom" , "Ville", "Confiance (coef)","Notoriété (coef)","Spécialité","Date de visite"} ;
+	private final String[] entetes = { "Nom" , "Prénom" , "Ville", "Confiance (coef)" ,"Notoriété (coef)" ,"Spécialité" ,"Date de visite"} ;
+
+
+
 
 	public ModeleListePraticiensCoeffConf() {
 		super();
-		//System.out.println(lesPraticiens);
 	}
 
 	public int getRowCount() {
@@ -33,6 +35,8 @@ public class ModeleListePraticiensCoeffConf extends AbstractTableModel {
 		return entetes[columnIndex];
 	}
 
+
+
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		if( columnIndex == 6 ){
@@ -43,6 +47,7 @@ public class ModeleListePraticiensCoeffConf extends AbstractTableModel {
 		}
 	}
 	
+	
 	public Class<?> getColumnClass(int columnIndex) {
 		switch ( columnIndex ){
 			case 0 :
@@ -51,17 +56,15 @@ public class ModeleListePraticiensCoeffConf extends AbstractTableModel {
 				return String.class;
 			case 3 :
 			case 4 :
-				//return JButton.class;
-				//return float.class;
 			case 5 :
 				return String.class;
 			case 6 : 
-				//return DateFr.class;
 				return String.class;
 				
 		}
 		return null;
 	}
+
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch( columnIndex ){

@@ -10,7 +10,8 @@ import fr.applirv.technique.DateFr;
 public class ModeleListePraticiensCoeffNot extends AbstractTableModel{
 	
 	ArrayList<Praticien> lesPraticiens = (ArrayList<Praticien>) new ModeleAppliRV().getModele().getLesPraticiensCoeffNot();
-	private final String[] entetes = { "Nom" , "Prénom" , "Ville", "Confiance (coef)","Notoriété (coef)","Spécialité","Date de visite"} ;
+	private final String[] entetes = { "Nom" , "Prénom" , "Ville", "Confiance (coef)","Notoriété (coef)" ,"Spécialité" ,"Date de visite"} ;
+
 
 	public ModeleListePraticiensCoeffNot() {
 		super();
@@ -30,15 +31,7 @@ public class ModeleListePraticiensCoeffNot extends AbstractTableModel{
 		return entetes[columnIndex];
 	}
 
-	/*@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		if( columnIndex == 6 ){
-			return true ;
-		}
-		else {
-			return false ;
-		}
-	}*/
+
 	
 	public Class<?> getColumnClass(int columnIndex) {
 		switch ( columnIndex ){
