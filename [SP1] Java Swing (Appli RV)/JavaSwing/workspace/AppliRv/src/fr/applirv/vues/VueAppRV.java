@@ -12,42 +12,36 @@ import fr.applirv.entites.RapportVisite;
 
 public class VueAppRV extends JFrame{
 	
-	//associer le contrôleur à la vue
+	// Création du controleur ControleurAppRv
 	private ControleurAppRv controleur;
 	
 	// Les menus
-	private JMenu menuFichier = new JMenu("Fichier") ;	
-	private JMenu menuAide = new JMenu("Aide") ;
-	
-	private JMenu menuRV = new JMenu("Visiteurs");
-	
+	private JMenu menuFichier    = new JMenu("Fichier") ;	
+	private JMenu menuAide 	     = new JMenu("Aide") ;
+	private JMenu menuRV         = new JMenu("Visiteurs");
 	private JMenu menuPraticiens = new JMenu("Praticiens");
 	
-	//les items des menus
-	private JMenuItem itemSeConnecter = new JMenuItem("Se connecter");
-	private JMenuItem itemSeDeconnecter = new JMenuItem("Se déconnecter");
-	private JMenuItem itemQuitter= new JMenuItem("Quitter");
-	
-	private JMenuItem itemVisualiserRV = new JMenuItem("Lister");
-	
-	private JMenuItem itemApropos = new JMenuItem("A Propos... ");
-	
-	private JMenuItem itemPraticiensCoeffConfiance = new JMenuItem("Lister par coefficient de confiance (croissant)");
-	private JMenuItem itemPraticiensTemps = new JMenuItem("Lister en fonction du temps écoulé depuis la dernière visite (décroissant)");
-	private JMenuItem itemPraticiensCoeffNotoriete = new JMenuItem("Lister par coefficient de notoriété (décroissant)");
+	// Création des JMenuItem
+	private JMenuItem itemSeConnecter = new JMenuItem				("Se connecter");
+	private JMenuItem itemSeDeconnecter = new JMenuItem				("Se déconnecter");
+	private JMenuItem itemQuitter= new JMenuItem					("Quitter");
+	private JMenuItem itemVisualiserRV = new JMenuItem				("Lister");
+	private JMenuItem itemApropos = new JMenuItem					("A Propos... ");
+	private JMenuItem itemPraticiensCoeffConfiance = new JMenuItem	("Lister par coefficient de confiance (croissant)");
+	private JMenuItem itemPraticiensTemps = new JMenuItem			("Lister en fonction du temps écoulé depuis la dernière visite (décroissant)");
+	private JMenuItem itemPraticiensCoeffNotoriete = new JMenuItem	("Lister par coefficient de notoriété (décroissant)");
 	
 	//les vues 
 	private CardLayout clVues = new CardLayout(0,0) ;
 	private VueAccueil vueAccueil = new VueAccueil();
-	
 	private VueListeVisiteurs vueListeVisiteurs = new VueListeVisiteurs();
-	
 	private VueListePraticiens vueListePraticiensCoeffConf = new VueListePraticiens(1);
 	private VueListePraticiens vueListePraticiensDate = new VueListePraticiens(2);
 	private VueListePraticiens vueListePraticiensCoeffNot = new VueListePraticiens(3);
 
 	
 	public VueAppRV(){
+
 		super();
 		
 		// Donne un titre à la fenêtre
@@ -73,19 +67,13 @@ public class VueAppRV extends JFrame{
 		this.setBarreMenusModeDeconnecte();
 	
 		
-		// Mise en place des vues (implémenter le gestionnaire d'agencement des vues)
-		// VOTRE CODE ICI - QUESTION 1
-		
 		//gestionnaire d'agencement
 		Container conteneur = this.getContentPane();
 		conteneur.setLayout(clVues);
 		
-		
+	
 		conteneur.add(vueAccueil , "Accueil");
-		
 		conteneur.add(vueListeVisiteurs , "vueListeVisiteurs");
-		
-		
 		conteneur.add(vueListePraticiensCoeffConf , "vueListePraticiensCoeffConf");
 		conteneur.add(vueListePraticiensDate , "vueListePraticiensDate");
 		conteneur.add(vueListePraticiensCoeffNot , "vueListePraticiensCoeffNot");
@@ -172,7 +160,9 @@ public class VueAppRV extends JFrame{
 		
 	}
 	
+	// Bascule la barre de menus dans le "Mode connecté"
 	public void setBarreMenusModeConnecte(){
+
 		// Désactive l'item de menu "Se connecter"
 		this.itemSeConnecter.setEnabled(false) ;
 		
@@ -186,6 +176,7 @@ public class VueAppRV extends JFrame{
 
 	}
 	
+	// Bascule la barre de menus dans le "Mode Non connecté"
 	public void setBarreMenusModeDeconnecte(){
 		
 		// Active l'item de menu "Se connecter"
@@ -200,6 +191,14 @@ public class VueAppRV extends JFrame{
 		
 	}
 	
+	public void changerVue(String nomVue) {
+		
+		//mise en place gestionnaire agencement
+		Container conteneur = this.getContentPane() ;
+		
+		this.clVues.show(conteneur,nomVue) ;
+
+	}
 
 	public ControleurAppRv getControleur() {
 		return controleur;
@@ -235,16 +234,6 @@ public class VueAppRV extends JFrame{
 	
 	public JMenuItem getItemPraticiensCoeffNotoriete(){
 		return itemPraticiensCoeffNotoriete;
-	}
-
-	public void changerVue(String nomVue) {
-		// VOTRE CODE ICI - QUESTION 2		
-		//mise en place gestionnaire agencement
-		Container conteneur = this.getContentPane() ;
-		
-		// Afficher la vue accueil
-		// L'INSTRUCTION CI-DESSOUS ET À DÉCOMMENTER UNE FOIS LE GESTIONNAIRE D'AGENCEMENT IMPLÉMENTÉ
-		this.clVues.show(conteneur,nomVue) ;
 	}
 	
 	public VueListeVisiteurs getVueListeVisiteurs() {

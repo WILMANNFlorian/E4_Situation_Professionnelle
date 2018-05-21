@@ -15,21 +15,26 @@ import fr.applirv.vues.VueAuthentification;
 
 
 public class ControleurAuthentification implements ActionListener {
+
+
 	private VueAuthentification vue;
 	
-	
+
 	public ControleurAuthentification(VueAuthentification vue){
+
 		super();
 		
 		this.vue = vue;
 		this.enregisterEcouteur();
+
 	}
 	
 	private void enregisterEcouteur(){
-		//enregister ecouteur se connecter et annuler 
 		
+		// Se met à l'écoute de l'item de menu "Se connecter" de la vue VueAppRV
 		this.vue.getbConnecter().addActionListener(this);
 		this.vue.getbAnnuler().addActionListener(this);
+
 	}
 	
 	
